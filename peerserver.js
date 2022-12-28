@@ -11,10 +11,7 @@ module.exports.PeerServer = (server) => {
     debug: true,
     path: "/myapp",
     generateClientId: customGenerationFunction,
-    ssl: {
-      key: fs.readFileSync("./certs/private.key"),
-      cert: fs.readFileSync("./certs/certificate.crt"),
-    },
+   
   });
 
   peerServer.on("connection" , (conn)=>{
