@@ -1,9 +1,12 @@
 const express = require("express");
 const { ExpressPeerServer } = require("peer");
 const { PeerServer } = require("./peerserver");
+const os = require("os");
 
-const HOSTNAME = "localhost";
-const PORT = 3006;
+
+
+const HOSTNAME = os.hostname();
+const PORT = 3000;
 
 const app = express();
 
