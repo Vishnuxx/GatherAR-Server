@@ -5,15 +5,15 @@ const os = require("os");
 
 
 
-const HOSTNAME = "signaling-server-aw3i.onrender.com";
-const PORT = 443;
+const HOSTNAME = process.env.h;
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
 
 
-const server = app.listen(PORT, () => {
-  console.log(`Server running at https://${HOSTNAME}:${PORT}/peerjs/myapp`);
+const server = app.listen(null, () => {
+  console.log(`Server running at ${PORT}`);
 });
 
 
