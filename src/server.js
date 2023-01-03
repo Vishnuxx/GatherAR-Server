@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 const { socketServics } = require("./services/socketService");
 
-const PORT = process.env.SERVER_PORT;
+const port = process.env.PORT;
 
 
 
@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
-    methods:["POST" , "GET"]
+    methods: ["POST", "GET"],
   })
 );
 
@@ -29,7 +29,6 @@ app.use((req, res, next) => {
   console.log(req.url)
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "*");
-  // res.header("Content-Security-Policy-Report-Only", "default-src")
   next()
 });
 
@@ -49,6 +48,6 @@ userProfileService(app);
 
 
 
-server.listen(PORT, () => {
-  console.log("listening on " , PORT );
+server.listen(port, () => {
+  console.log("listening on ", port);
 });
