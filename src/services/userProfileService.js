@@ -9,6 +9,7 @@ const EVENTS = {
 };
 
 module.exports.userProfileService = (app) => {
+  
   app.post(EVENTS.createProfile, (req, res) => {
     user.createUserProfile(
       req.body,
