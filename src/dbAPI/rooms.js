@@ -15,7 +15,7 @@ module.exports = {
     db.ref(PATHS.rooms + roomid)
       .set({
         roomname: roomname,
-        admins: [uid],
+        admins: uid,
         members: [],
       })
       .then(() => {
@@ -27,16 +27,18 @@ module.exports = {
       });
   },
 
-  roomExists: async (roomid) => {
-    try {
-      await db.ref(PATHS.rooms)
-      .child(roomid)
-      .get()
-      return true
-    } catch (error) {
-      return false
-    }
+  roomExists: (roomid , onSuccess , onError) => {
     
+    db.ref(PATHS.rooms+roomid)
+      .get().then((snap)=>{
+        if (snap.exists()){
+           onSuccess(snap);
+        } else {
+          onError()
+        }
+      }).catch((errr)=>{
+        onError()
+      })
   },
 
   getRoomDetails: (roomid , onSuccess , onError)=>{

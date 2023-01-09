@@ -1,7 +1,7 @@
 const user = require("../dbAPI/userProfile");
 const rooms = require("../dbAPI/rooms");
 
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser")
 
 const EVENTS = {
   createProfile: "/createprofile",
@@ -11,8 +11,13 @@ const EVENTS = {
 module.exports.userProfileService = (app) => {
   
   app.post(EVENTS.createProfile, (req, res) => {
+    const {username , email , uid } = req.body
     user.createUserProfile(
-      req.body,
+      {
+        username : username,
+        email : email,
+        uid : uid
+      },
       (snap) => {
         console.log("user added ");
         res.json(
@@ -33,42 +38,42 @@ module.exports.userProfileService = (app) => {
     );
   });
 
-   app.post(EVENTS.createroom, (req, res) => {
-     const { uid, roomname } = req.body;
-     console.log(req.body);
-     rooms.createRoom(
-       req.body,
-       (roomId) => {
-         console.log("cretaed in rooms " + roomId);
-         user.addToMyRoom(uid,
-           roomId,
-           () => {
-             console.log("cretaed in room ");
-             res.json(
-               JSON.stringify({
-                 status: "OK",
-                 roomId: roomId,
-               })
-             );
-           },
-           (err) => {
-             res.json(
-               JSON.stringify({
-                 status: "ERROR",
-                 message: err.toString(),
-               })
-             );
-           }
-         );
-       },
-       (err) => {
-         res.json(
-           JSON.stringify({
-             status: "ERROR",
-             message: err.toString(),
-           })
-         );
-       }
-     );
-   });
+  //  app.post(EVENTS.createroom, (req, res) => {
+  //    const { uid, roomname } = req.body;
+  //    console.log(req.body);
+  //    rooms.createRoom(
+  //      req.body,
+  //      (roomId) => {
+  //        console.log("cretaed in rooms " + roomId);
+  //        user.addToMyRoom(uid,
+  //          roomId,
+  //          () => {
+  //            console.log("cretaed in room ");
+  //            res.json(
+  //              JSON.stringify({
+  //                status: "OK",
+  //                roomId: roomId,
+  //              })
+  //            );
+  //          },
+  //          (err) => {
+  //            res.json(
+  //              JSON.stringify({
+  //                status: "ERROR",
+  //                message: err.toString(),
+  //              })
+  //            );
+  //          }
+  //        );
+  //      },
+  //      (err) => {
+  //        res.json(
+  //          JSON.stringify({
+  //            status: "ERROR",
+  //            message: err.toString(),
+  //          })
+  //        );
+  //      }
+  //    );
+  //  });
 };

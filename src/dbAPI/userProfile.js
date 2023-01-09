@@ -14,6 +14,7 @@ module.exports = {
       email: email,
       rooms: {},
     };
+    
 
     db.ref(PATHS.userprofiles + uid)
       .set(data, (snap) => {
