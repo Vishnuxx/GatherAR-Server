@@ -29,9 +29,6 @@ module.exports.editorCommands = (socket , userSocket) => {
       });
      
     });
-    userSocket.on("remove-object", (data) => {});
-    userSocket.on("update-object", (data) => {
-        
-    });
+   
 
 }
